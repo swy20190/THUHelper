@@ -11,7 +11,12 @@
         >
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/outer_appbar">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/app_bar">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -28,7 +33,9 @@
             android:id="@+id/tabLayout"
             app:tabSelectedTextColor="@android:color/black"
             app:tabMode="fixed"/>
+        </com.google.android.material.appbar.AppBarLayout>
         <androidx.viewpager.widget.ViewPager
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/viewPager"/>
