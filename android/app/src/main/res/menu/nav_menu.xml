@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--以下的前三个title均为动态获取的个人信息，第四个settings是写死的-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_nickname"
+            android:title="昵称"
+            android:icon="@drawable/ic_nickname"/>
+        <item
+            android:id="@+id/nav_mail"
+            android:title="邮箱"
+            android:icon="@drawable/ic_mail"/>
+        <item
+            android:id="@+id/nav_dorm"
+            android:title="宿舍"
+            android:icon="@drawable/ic_dorm"/>
+        <item
+            android:id="@+id/nav_settings"
+            android:title="设置"
+            android:icon="@drawable/ic_shezhi"/>
 
+
+    </group>
 </menu>
