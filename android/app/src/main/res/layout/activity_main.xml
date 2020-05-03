@@ -23,7 +23,8 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"/>
+            app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
+            />
         </com.google.android.material.appbar.AppBarLayout>
         <com.google.android.material.tabs.TabLayout
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
