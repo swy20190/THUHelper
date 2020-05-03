@@ -31,11 +31,10 @@
         android:layout_height="wrap_content"
         android:text="ddl日期"
         android:id="@+id/release_ddl_date"/>
-    <Button
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="选择ddl时间"
-        android:textSize="32dp"
+        android:text="ddl时间"
         android:id="@+id/release_ddl_time"/>
     <Button
         android:layout_width="match_parent"
