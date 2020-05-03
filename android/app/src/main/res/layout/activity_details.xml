@@ -1,13 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DetailsActivity">
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/detail_sender_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_photo"
+            android:id="@+id/detail_sender_avatar"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="score1"
+                android:id="@+id/detail_sender_score"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="mCounts1"
+                android:id="@+id/detail_sender_mCount"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="nickname1"
+                android:id="@+id/detail_sender_nickname"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/detail_receiver_info"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_photo"
+            android:id="@+id/detail_receiver_avatar"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="score2"
+                android:id="@+id/detail_receiver_score"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="mCounts2"
+                android:id="@+id/detail_receiver_mCount"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="nickname2"
+                android:id="@+id/detail_receiver_nickname"/>
+        </LinearLayout>
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is details page"/>
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:id="@+id/detail_ticket_title"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="uid"
+        android:id="@+id/detail_ticket_uid"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ticket content"
+            android:id="@+id/detail_ticket_content"/>
+    </ScrollView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_ticket_status"
+        android:text="有人接单"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_ticket_t2ddl"
+        android:text="time to ddl: 114514"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:visibility="visible"
+            android:id="@+id/detail_exe_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="抢单"
+            android:background="#0F0"/>
+        <Button
+            android:id="@+id/detail_cancel_button"
+            android:visibility="visible"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="取消订单"
+            android:background="#F00"/>
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="返回首页"
+        android:background="#00F"
+        android:id="@+id/detail_back_button"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
