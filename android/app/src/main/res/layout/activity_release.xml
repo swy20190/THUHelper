@@ -23,15 +23,20 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ddl"
-        android:inputType="datetime"
-        android:id="@+id/release_ddl"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/release_bonus"
         android:hint="bonus"
         android:inputType="text"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ddl日期"
+        android:id="@+id/release_ddl_date"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择ddl时间"
+        android:textSize="32dp"
+        android:id="@+id/release_ddl_time"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
