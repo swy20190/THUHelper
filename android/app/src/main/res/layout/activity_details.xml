@@ -34,6 +34,11 @@
                 android:text="nickname1"
                 android:id="@+id/detail_sender_nickname"/>
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="senderUID"
+            android:id="@+id/detail_sender_uid"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/detail_receiver_info"
@@ -66,6 +71,11 @@
                 android:text="nickname2"
                 android:id="@+id/detail_receiver_nickname"/>
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="receiverUID"
+            android:id="@+id/detail_receiver_uid"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
