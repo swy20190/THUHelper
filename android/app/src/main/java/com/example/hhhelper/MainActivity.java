@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -42,6 +43,8 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.io.File;
 import java.io.FileDescriptor;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.function.BiFunction;
 
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Fragment> fragmentList = new ArrayList<>();
     private CircleImageView avatar;
     private Uri imageUri;
+    public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
 
     @Override
@@ -168,6 +172,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == 0) {
                     //TODO
+                    File outputImage = new File(getExternalCacheDir(),
+                            "output_image.jpg");
+                    try{
+                        if(outputImage.exists()){
+                            outputImage.delete();
+                        }
+                        outputImage.createNewFile();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+                    if(Build.VERSION.SDK_INT>=24){
+                        imageUri = FileProvider.getUriForFile(MainActivity.this,
+                                "com.example.hhhelper.fileprovider",outputImage);
+                    }else{
+                        imageUri = Uri.fromFile(outputImage);
+                    }
+                    Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                    startActivityForResult(intent, TAKE_PHOTO);
                 }else if(which == 1){
                     if(ContextCompat.checkSelfPermission(MainActivity.this,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
@@ -204,6 +227,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         switch (requestCode){
+            case TAKE_PHOTO:
+                if(resultCode==RESULT_OK){
+                    try{
+                        Bitmap bitmap = BitmapFactory.decodeStream(
+                                getContentResolver().openInputStream(imageUri)
+                        );
+                        avatar.setImageBitmap(bitmap);
+                    }catch(FileNotFoundException e){
+                        e.printStackTrace();
+                    }
+                }
+                break;
             case CHOOSE_PHOTO:
                 if (resultCode == RESULT_OK){
                     if (Build.VERSION.SDK_INT >= 19){
