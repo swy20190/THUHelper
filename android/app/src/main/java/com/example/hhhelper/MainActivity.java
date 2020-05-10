@@ -3,6 +3,7 @@ package com.example.hhhelper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -18,6 +19,7 @@ import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -70,18 +72,13 @@ public class MainActivity extends AppCompatActivity {
         View drawHeader = navigationView.inflateHeaderView(R.layout.nav_header);
         //select avatar
         avatar = (CircleImageView)drawHeader.findViewById(R.id.icon_image);
+        //这地方应该是先从网络上获得头像
         avatar.setImageResource(R.drawable.ic_photo);
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"avatar clicked!",Toast.LENGTH_SHORT).show();
-                if(ContextCompat.checkSelfPermission(MainActivity.this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(MainActivity.this, new
-                            String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                }else{
-                    openAlbum();
-                }
+                //Toast.makeText(MainActivity.this,"avatar clicked!",Toast.LENGTH_SHORT).show();
+                setupDialog();
             }
         });
 
@@ -163,6 +160,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //choose avatar
+    private void setupDialog(){
+        final String[] items={"拍照","相册"};
+        AlertDialog.Builder listDialog = new AlertDialog.Builder(this);
+        listDialog.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                    //TODO
+                }else if(which == 1){
+                    if(ContextCompat.checkSelfPermission(MainActivity.this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+                        ActivityCompat.requestPermissions(MainActivity.this, new
+                                String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    }else{
+                        openAlbum();
+                    }
+                }
+            }
+        });
+        listDialog.show();
+    }
     private void openAlbum(){
         Intent intent = new Intent("android.intent.action.GET_CONTENT");
         intent.setType("image/*");
