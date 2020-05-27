@@ -10,58 +10,80 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="昵称"
-        android:id="@+id/edit_nickname"/>
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
+        android:id="@+id/edit_nickname"
+        android:layout_weight="10"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="邮箱"
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
         android:inputType="textEmailAddress"
-        android:id="@+id/edit_mail"/>
+        android:id="@+id/edit_mail"
+        android:layout_weight="10"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="宿舍"
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
         android:inputType="text"
-        android:id="@+id/edit_dorm"/>
+        android:id="@+id/edit_dorm"
+        android:layout_weight="10"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="保存信息"
-        android:background="#0F0"
+        android:background="@color/darkTsinghua"
         android:textSize="32dp"
-        android:textColor="#000"
-        android:id="@+id/settings_info_button"/>
+        android:textColor="@color/accentTsinghua"
+        android:id="@+id/settings_info_button"
+        android:layout_weight="5"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="密码设置"
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
         android:textSize="32dp"
-        android:id="@+id/settings_encode_label"/>
+        android:id="@+id/settings_encode_label"
+        android:layout_weight="5"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="原密码"
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
         android:inputType="textPassword"
-        android:id="@+id/edit_old_key"/>
+        android:id="@+id/edit_old_key"
+        android:layout_weight="10"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="新密码"
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
         android:inputType="textPassword"
-        android:id="@+id/edit_new_key"/>
+        android:id="@+id/edit_new_key"
+        android:layout_weight="10"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="确认新密码"
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
         android:inputType="textPassword"
-        android:id="@+id/edit_new_key_confirm"/>
+        android:id="@+id/edit_new_key_confirm"
+        android:layout_weight="10"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="保存密码"
         android:textSize="32dp"
-        android:background="#F00"
-        android:textColor="#000"
+        android:background="@color/darkTsinghua"
+        android:textColor="@color/accentTsinghua"
         android:id="@+id/settings_ensure_button"/>
 
 </LinearLayout>

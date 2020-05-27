@@ -8,7 +8,9 @@
         android:id="@+id/detail_sender_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/basicTsinghua"
+        android:layout_weight="20">
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -22,22 +24,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="score1"
+                android:textColor="@color/white"
                 android:id="@+id/detail_sender_score"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="mCounts1"
+                android:textColor="@color/white"
                 android:id="@+id/detail_sender_mCount"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="nickname1"
+                android:textColor="@color/white"
                 android:id="@+id/detail_sender_nickname"/>
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="senderUID"
+            android:textColor="@color/white"
             android:id="@+id/detail_sender_uid"/>
     </LinearLayout>
     <LinearLayout
@@ -45,7 +51,9 @@
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/basicTsinghua"
+        android:layout_weight="20">
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -59,80 +67,104 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="score2"
+                android:textColor="@color/white"
                 android:id="@+id/detail_receiver_score"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="mCounts2"
+                android:textColor="@color/white"
                 android:id="@+id/detail_receiver_mCount"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="nickname2"
+                android:textColor="@color/white"
                 android:id="@+id/detail_receiver_nickname"/>
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="receiverUID"
+            android:textColor="@color/white"
             android:id="@+id/detail_receiver_uid"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="title"
-        android:id="@+id/detail_ticket_title"/>
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
+        android:id="@+id/detail_ticket_title"
+        android:layout_weight="10"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="uid"
-        android:id="@+id/detail_ticket_uid"/>
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
+        android:id="@+id/detail_ticket_uid"
+        android:layout_weight="10"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="50">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ticket content"
+            android:textColor="@color/white"
+            android:background="@color/lightTsinghua"
             android:id="@+id/detail_ticket_content"/>
     </ScrollView>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/detail_ticket_status"
-        android:text="有人接单"/>
+        android:text="有人接单"
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
+        android:layout_weight="10"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/detail_ticket_t2ddl"
-        android:text="time to ddl: 114514"/>
+        android:text="time to ddl: 114514"
+        android:textColor="@color/white"
+        android:background="@color/lightTsinghua"
+        android:layout_weight="10"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_weight="5">
         <Button
             android:visibility="visible"
             android:id="@+id/detail_exe_button"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="抢单"
-            android:background="#0F0"/>
+            android:textColor="@color/accentTsinghua"
+            android:background="@color/basicTsinghua"/>
         <Button
             android:id="@+id/detail_cancel_button"
             android:visibility="visible"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="取消订单"
-            android:background="#F00"/>
+            android:textColor="@color/accentTsinghua"
+            android:background="@color/basicTsinghua"/>
     </LinearLayout>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="返回首页"
-        android:background="#00F"
-        android:id="@+id/detail_back_button"/>
+        android:textColor="@color/accentTsinghua"
+        android:background="@color/darkTsinghua"
+        android:id="@+id/detail_back_button"
+        android:layout_weight="5"/>
 
 
 </LinearLayout>

@@ -10,39 +10,49 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="标题"
+        android:textColor="@color/white"
         android:inputType="text"
-        android:id="@+id/release_title"/>
+        android:id="@+id/release_title"
+        android:background="@color/lightTsinghua"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="详情"
+        android:textColor="@color/white"
         android:inputType="text"
         android:id="@+id/release_detail"
         android:minLines="5"
-        android:gravity="top"/>
+        android:gravity="top"
+        android:background="@color/lightTsinghua"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/release_bonus"
         android:hint="bonus"
-        android:inputType="text"/>
+        android:textColor="@color/white"
+        android:inputType="text"
+        android:background="@color/lightTsinghua"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ddl日期"
-        android:id="@+id/release_ddl_date"/>
+        android:textColor="@color/white"
+        android:id="@+id/release_ddl_date"
+        android:background="@color/lightTsinghua"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ddl时间"
-        android:id="@+id/release_ddl_time"/>
+        android:textColor="@color/white"
+        android:id="@+id/release_ddl_time"
+        android:background="@color/lightTsinghua"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="提交"
         android:textSize="32dp"
-        android:textColor="#000"
-        android:background="#00F"
+        android:textColor="@color/accentTsinghua"
+        android:background="@color/basicTsinghua"
         android:id="@+id/release_button"/>
 
 </LinearLayout>

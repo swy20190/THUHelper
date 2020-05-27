@@ -22,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="登录"
-        android:background="#F00"
+        android:background="@color/basicTsinghua"
         android:textSize="32dp"
-        android:textColor="#000"/>
+        android:textColor="@color/accentTsinghua"/>
 
 </LinearLayout>

@@ -3,4 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="basicTsinghua">#862894</color>
+    <color name="darkTsinghua">#420050</color>
+    <color name="lightTsinghua">#d678e4</color>
+    <color name="accentTsinghua">#99f78b</color>
+    <color name="white">#ffffff</color>
 </resources>

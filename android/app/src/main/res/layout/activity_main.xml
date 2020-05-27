@@ -21,7 +21,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/darkTsinghua"
             android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
             />
@@ -30,9 +30,9 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@android:color/holo_green_light"
+            android:background="@color/darkTsinghua"
             android:id="@+id/tabLayout"
-            app:tabSelectedTextColor="@android:color/black"
+            app:tabSelectedTextColor="@color/accentTsinghua"
             app:tabMode="fixed"/>
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.viewpager.widget.ViewPager

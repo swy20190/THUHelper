@@ -9,7 +9,8 @@
 <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/basicTsinghua">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,17 +23,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ticket_name"
+        android:textColor="@color/white"
         android:layout_marginLeft="10dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text = "Some Bonus"
+        android:textColor="@color/white"
         android:layout_marginLeft="10dp"
         android:id="@+id/ticket_bonus"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Some ddl"
+        android:textColor="@color/white"
         android:layout_marginLeft="10dp"
         android:id="@+id/ticket_ddl"/>
     </LinearLayout>
