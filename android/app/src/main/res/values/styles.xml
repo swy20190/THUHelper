@@ -10,5 +10,4 @@
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@color/lightTsinghua</item>
     </style>
-
 </resources>

@@ -23,6 +23,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/darkTsinghua"
             android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+            app:titleTextColor="@color/white"
             app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
             />
         </com.google.android.material.appbar.AppBarLayout>
@@ -33,6 +34,7 @@
             android:background="@color/darkTsinghua"
             android:id="@+id/tabLayout"
             app:tabSelectedTextColor="@color/accentTsinghua"
+            app:tabTextColor="@color/white"
             app:tabMode="fixed"/>
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.viewpager.widget.ViewPager
