@@ -70,6 +70,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //检查登录状态
+        if(Math.random()*2>1){
+            // mock that the account is valid
+        }
+        else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("登录错误");
+            builder.setMessage("请重新登录");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        //检查完毕
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -150,6 +169,29 @@ public class MainActivity extends AppCompatActivity {
         };
         viewPager.setAdapter(mPageAdapter);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        //检查登录状态
+        if(Math.random()*2>1){
+            // mock that the account is valid
+        }
+        else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("登录错误");
+            builder.setMessage("请重新登录");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.toolbar,menu);
