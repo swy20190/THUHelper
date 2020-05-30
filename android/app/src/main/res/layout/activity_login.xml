@@ -24,6 +24,22 @@
         android:inputType="textPassword"
         android:layout_below="@+id/login_account"
          />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_remember_container"
+        android:layout_below="@+id/login_password">
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/login_remember"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/login_remember_tag"
+        android:text="记住密码"
+        android:textSize="20dp"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/login_button"

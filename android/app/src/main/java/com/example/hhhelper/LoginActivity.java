@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +27,15 @@ public class LoginActivity extends AppCompatActivity {
         editor = preferences.edit();
         final EditText account = (EditText) findViewById(R.id.login_account);
         final EditText password = (EditText) findViewById(R.id.login_password);
+        boolean isRemembered = preferences.getBoolean("isRemembered", false);
+        if(isRemembered){//自动填入账号密码
+            String rememberedAccount = preferences.getString("account","");
+            String rememberedPassword = preferences.getString("password","");
+            account.setText(rememberedAccount);
+            password.setText(rememberedPassword);
+        }
         Button loginButton = (Button) findViewById(R.id.login_button);
+        final CheckBox rememberInfo = (CheckBox)findViewById(R.id.login_remember);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +47,9 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean("isEnsured",true); //经过登录验证
                     editor.putString("account",accountString);
                     editor.putString("password",passwordString);
+                    if(rememberInfo.isChecked()){
+                        editor.putBoolean("isRemembered",true);
+                    }
                     editor.commit();
 
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
