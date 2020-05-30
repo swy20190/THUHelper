@@ -18,11 +18,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -31,6 +33,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -48,12 +51,14 @@ import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.function.BiFunction;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
+    private SharedPreferences preferences;
     private DrawerLayout mDrawerLayout;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -70,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Toast.makeText(this,"onCreate",Toast.LENGTH_SHORT).show();
         //检查登录状态
         checkLogin();
         //检查完毕
@@ -158,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        //Toast.makeText(this,"onStart",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"onStart",Toast.LENGTH_SHORT).show();
         checkLogin();
     }
 
@@ -386,13 +393,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkLogin(){
         //检查登录状态
-        if(Math.random()*2>1){
+        String account = preferences.getString("account", "");
+        String password = preferences.getString("password","");
+        boolean isEnsured = preferences.getBoolean("isEnsured", false);
+        if(isEnsured){
             // mock that the account is valid
         }
         else{
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("登录错误");
-            builder.setMessage("请重新登录");
+            builder.setMessage("请登录/注册");
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
