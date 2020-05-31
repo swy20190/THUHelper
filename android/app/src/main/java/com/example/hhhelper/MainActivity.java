@@ -59,6 +59,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
     private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
     private DrawerLayout mDrawerLayout;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Toast.makeText(this,"onCreate",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"onCreate",Toast.LENGTH_SHORT).show();
         //检查登录状态
         checkLogin();
         //检查完毕
@@ -112,6 +113,15 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_settings:
                         Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
                         startActivity(intent);
+                    case R.id.nav_logout:
+                        editor = preferences.edit();
+                        editor.putString("account","");
+                        editor.putString("password","");
+                        editor.putBoolean("isEnsured",false);
+                        editor.putBoolean("isRemembered",false);
+                        editor.commit();
+                        Intent intent1 = new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intent1);
                     default:
                         break;
                 }
@@ -165,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        Toast.makeText(this,"onStart",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"onStart",Toast.LENGTH_SHORT).show();
         checkLogin();
     }
 

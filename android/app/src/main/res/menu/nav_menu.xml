@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--以下的前三个title均为动态获取的个人信息，第四个settings是写死的-->
+<!--以下的前三个title均为动态获取的个人信息，第四、五个settings、logout是写死的-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
@@ -18,7 +18,10 @@
             android:id="@+id/nav_settings"
             android:title="设置"
             android:icon="@drawable/ic_shezhi"/>
-
+        <item
+            android:id="@+id/nav_logout"
+            android:title="退出登录"
+            android:icon="@drawable/ic_logout"/>
 
     </group>
 </menu>
