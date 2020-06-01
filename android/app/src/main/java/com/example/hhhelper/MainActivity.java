@@ -202,24 +202,31 @@ public class MainActivity extends AppCompatActivity {
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                startSearchActivity(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(TextUtils.isEmpty(newText)){
-                    return false;
-                }
-                showSearchResult(newText);
+//                if(TextUtils.isEmpty(newText)){
+//                    return false;
+//                }
+//                showSearchResult(newText);
                 return true;
             }
         });
     }
 
-    public void showSearchResult(String searchText){
-        // 根据搜索内容显示相应的订单
-        Toast.makeText(this, searchText, Toast.LENGTH_SHORT).show();
+    public void startSearchActivity(String query){
+        Intent intent = new Intent(MainActivity.this, SearchResult.class);
+        intent.putExtra("queryString",query);
+        startActivity(intent);
     }
+
+//    public void showSearchResult(String searchText){
+//        // 根据搜索内容显示相应的订单
+//        Toast.makeText(this, searchText, Toast.LENGTH_SHORT).show();
+//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
