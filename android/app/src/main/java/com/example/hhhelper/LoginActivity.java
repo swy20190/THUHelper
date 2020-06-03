@@ -36,6 +36,14 @@ public class LoginActivity extends AppCompatActivity {
         }
         Button loginButton = (Button) findViewById(R.id.login_button);
         final CheckBox rememberInfo = (CheckBox)findViewById(R.id.login_remember);
+        final TextView toRegister = (TextView)findViewById(R.id.login_toregister);
+        toRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

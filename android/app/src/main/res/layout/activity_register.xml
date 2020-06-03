@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@drawable/register_background">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_account"
+        android:hint="账号"
+        android:textSize="20dp"
+        android:inputType="text"
+        android:layout_centerInParent="true"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_password"
+        android:hint="密码"
+        android:textSize="20dp"
+        android:inputType="textPassword"
+        android:layout_below="@id/register_account"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_passwordEnsure"
+        android:layout_below="@id/register_password"
+        android:hint="确认密码"
+        android:textSize="20dp"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/register_registerButton"
+        android:textSize="32dp"
+        android:textColor="@color/accentTsinghua"
+        android:background="@color/darkTsinghua"/>
+
+
+</RelativeLayout>
