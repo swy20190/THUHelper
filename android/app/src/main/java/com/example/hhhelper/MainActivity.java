@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_settings:
                         Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
                         startActivity(intent);
+                        break;
                     case R.id.nav_logout:
                         editor = preferences.edit();
                         editor.putString("account","");
@@ -122,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.commit();
                         Intent intent1 = new Intent(MainActivity.this,LoginActivity.class);
                         startActivity(intent1);
+                        break;
                     default:
                         break;
                 }
