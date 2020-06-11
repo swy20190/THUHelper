@@ -42,6 +42,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private DrawerLayout mDrawerLayout;
+    private NavigationView navigationView;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FragmentPagerAdapter mPageAdapter;
@@ -93,9 +95,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         View drawHeader = navigationView.inflateHeaderView(R.layout.nav_header);
+        TextView headerUid = (TextView) drawHeader.findViewById(R.id.nav_head_uid);
+        headerUid.setText(userID);
         //select avatar
         avatar = (CircleImageView)drawHeader.findViewById(R.id.icon_image);
         //avatar.setImageResource(R.drawable.ic_photo);
@@ -120,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
                 setupDialog();
             }
         });
+        //init navigation menu
+        initNavMenu(navigationView);
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar!=null){
@@ -206,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
         //Toast.makeText(this,"onRestart",Toast.LENGTH_SHORT).show();
         checkLogin();
+        initNavMenu(navigationView);
     }
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.toolbar,menu);
@@ -487,5 +494,20 @@ public class MainActivity extends AppCompatActivity {
         editor = preferences.edit();
         editor.putString("avatarBase64",base64Bitmap);
         editor.commit();
+    }
+
+    private void initNavMenu(NavigationView navigationView){
+        String nickName = preferences.getString("nickName","");
+        String mail = preferences.getString("mail","");
+        String dorm = preferences.getString("dorm","");
+        if(!nickName.equals("")){
+            navigationView.getMenu().getItem(0).setTitle(nickName);
+        }
+        if(!mail.equals("")){
+            navigationView.getMenu().getItem(1).setTitle(mail);
+        }
+        if(!dorm.equals("")){
+            navigationView.getMenu().getItem(2).setTitle(dorm);
+        }
     }
 }

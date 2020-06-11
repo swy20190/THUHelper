@@ -22,9 +22,9 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
-        EditText editTextNick = (EditText) findViewById(R.id.edit_nickname);
-        EditText editTextMail = (EditText) findViewById(R.id.edit_mail);
-        EditText editTextDorm = (EditText) findViewById(R.id.edit_dorm);
+        final EditText editTextNick = (EditText) findViewById(R.id.edit_nickname);
+        final EditText editTextMail = (EditText) findViewById(R.id.edit_mail);
+        final EditText editTextDorm = (EditText) findViewById(R.id.edit_dorm);
         final EditText editTextOld = (EditText) findViewById(R.id.edit_old_key);
         final EditText editTextNew = (EditText) findViewById(R.id.edit_new_key);
         final EditText editTextYaNew = (EditText) findViewById(R.id.edit_new_key_confirm);
@@ -50,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
                             editor.putBoolean("isRemembered", true);
                             editor.putString("password", editTextNew.getText().toString());
                         }
+
                         editor.commit();
                         Intent intent = new Intent(SettingsActivity.this, LoginActivity.class);
                         startActivity(intent);
@@ -64,6 +65,10 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //上传信息
+                editor.putString("nickName",editTextNick.getText().toString());
+                editor.putString("mail",editTextMail.getText().toString());
+                editor.putString("dorm",editTextDorm.getText().toString());
+                editor.commit();
                 Toast.makeText(SettingsActivity.this,"个人信息已保存",Toast.LENGTH_SHORT).show();
             }
         });
