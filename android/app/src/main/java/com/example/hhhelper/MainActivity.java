@@ -37,6 +37,7 @@ import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,6 +48,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
 
+    private String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
         //检查登录状态
         checkLogin();
         //检查完毕
+        //获得userID
+        userID = getUserID();
+        //获得完毕
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -91,8 +98,21 @@ public class MainActivity extends AppCompatActivity {
         View drawHeader = navigationView.inflateHeaderView(R.layout.nav_header);
         //select avatar
         avatar = (CircleImageView)drawHeader.findViewById(R.id.icon_image);
-        //这地方应该是先从网络上获得头像
-        avatar.setImageResource(R.drawable.ic_photo);
+        //avatar.setImageResource(R.drawable.ic_photo);
+        String base64Avatar = preferences.getString("avatarBase64","");
+        if(base64Avatar.equals("")){
+            avatar.setImageResource(R.drawable.ic_photo);
+        }
+        else{
+            Bitmap bitmap = null;
+            try{
+                byte[] bitmapByte  =Base64.decode(base64Avatar, Base64.DEFAULT);
+                bitmap = BitmapFactory.decodeByteArray(bitmapByte,0,bitmapByte.length);
+                avatar.setImageBitmap(bitmap);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -312,6 +332,8 @@ public class MainActivity extends AppCompatActivity {
                                 getContentResolver().openInputStream(imageUri)
                         );
                         avatar.setImageBitmap(bitmap);
+                        uploadBitmap2Base64(bitmap);
+                        storeBitmapAsBase64(bitmap);
                     }catch(FileNotFoundException e){
                         e.printStackTrace();
                     }
@@ -373,7 +395,14 @@ public class MainActivity extends AppCompatActivity {
         if(imagePath!=null){
             Bitmap bitmap = getBitmapFromUri(this, getImageContentUri(this, imagePath));
             avatar.setImageBitmap(bitmap);
-            Toast.makeText(this,"set avatar",Toast.LENGTH_SHORT).show();
+            if(uploadBitmap2Base64(bitmap)){
+                //success
+                storeBitmapAsBase64(bitmap);
+                Toast.makeText(this,"set avatar",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(this, "failed to get avatar",Toast.LENGTH_SHORT).show();
+            }
         }else{
             Toast.makeText(this, "failed to get avatar",Toast.LENGTH_SHORT).show();
         }
@@ -432,5 +461,31 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+    }
+    private String getUserID(){
+        String ret = preferences.getString("userID","");
+        return ret;
+    }
+
+    //将头像以base64上传到服务器
+    private boolean uploadBitmap2Base64(Bitmap bitmap){
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bos);
+        byte[] bytes = bos.toByteArray();
+        String base64Bitmap = Base64.encodeToString(bytes, Base64.DEFAULT);
+        //TODO
+        //将base64Bitmap上传到服务器
+        return true;
+    }
+
+    //将头像以base64存储到本地preference
+    private void storeBitmapAsBase64(Bitmap bitmap){
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,40,bos);
+        byte[] bytes = bos.toByteArray();
+        String base64Bitmap = Base64.encodeToString(bytes, Base64.DEFAULT);
+        editor = preferences.edit();
+        editor.putString("avatarBase64",base64Bitmap);
+        editor.commit();
     }
 }
