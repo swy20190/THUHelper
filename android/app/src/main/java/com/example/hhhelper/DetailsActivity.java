@@ -14,6 +14,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailsActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,6 @@ public class DetailsActivity extends AppCompatActivity {
         String uid = intent.getStringExtra("ticketUID");
         // 使用这个UID进行订单的信息查询
         // 应该需要开一个线程，然后更新ui
-        // 根据订单信息（比如订单的发起人是我自己），动态决定布局（比如此时我应当显示删除订单的按钮，隐藏抢单的按钮）
         // 或者布局静态，点击按钮的时候报error（比如你不能抢自己的订单，你不能删别人的订单）
         final TextView viewUid = (TextView) findViewById(R.id.detail_ticket_uid);
         viewUid.setText("uid: "+uid);

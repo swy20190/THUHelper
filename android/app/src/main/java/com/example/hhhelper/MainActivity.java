@@ -38,6 +38,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -493,6 +494,7 @@ public class MainActivity extends AppCompatActivity {
         String base64Bitmap = Base64.encodeToString(bytes, Base64.DEFAULT);
         editor = preferences.edit();
         editor.putString("avatarBase64",base64Bitmap);
+        Log.d("base64",base64Bitmap);
         editor.commit();
     }
 

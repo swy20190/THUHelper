@@ -1,6 +1,8 @@
 package com.example.hhhelper;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,13 @@ public class Fragment_receive extends Fragment {
     private RecyclerViewAdapter mAdapter;
     private View mainView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ArrayList<Ticket> data;
+    private SharedPreferences preferences;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState){
+        //这个preference是为了头像base64的mock
+        preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         mainView = inflater.inflate(R.layout.fragment_receive,container,false);
         initView();
         swipeRefreshLayout = (SwipeRefreshLayout) mainView.findViewById(R.id.fragment_receive_swipe);
@@ -38,10 +44,7 @@ public class Fragment_receive extends Fragment {
     private void initView(){
         mRecyclerView = mainView.findViewById(R.id.recyclerview_receive);
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false);
-        ArrayList<Ticket> data = new ArrayList<>();
-        for(int i=0;i<20;i++){
-            data.add(new Ticket("我的接单"+(int)(Math.random()*20),R.mipmap.ic_launcher));
-        }
+        initData();
         mAdapter = new RecyclerViewAdapter(data);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -65,5 +68,17 @@ public class Fragment_receive extends Fragment {
                 });
             }
         }).start();
+    }
+
+    private void initData(){
+        data = new ArrayList<>();
+        String base64Mock = preferences.getString("avatarBase64","");
+
+        for(int i=0;i<20;i++){
+            //String senderImage = preferences.getString("avatarBase64","");
+            Ticket ticket = new Ticket("我的接单"+(int)(Math.random()*20));
+            ticket.setSenderImageBase64(base64Mock);
+            data.add(ticket);
+        }
     }
 }
