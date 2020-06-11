@@ -3,29 +3,40 @@ package com.example.hhhelper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Date;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailsActivity extends AppCompatActivity {
-
+    private Ticket currentTicket;
+    private SharedPreferences preferences;
+    private String myID;
+    private User sender;
+    private User receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        myID = preferences.getString("userID","");
         Intent intent = getIntent();
         String uid = intent.getStringExtra("ticketUID");
         // 使用这个UID进行订单的信息查询
         // 应该需要开一个线程，然后更新ui
         // 或者布局静态，点击按钮的时候报error（比如你不能抢自己的订单，你不能删别人的订单）
+        currentTicket = getCurrentTicket(uid);
         final TextView viewUid = (TextView) findViewById(R.id.detail_ticket_uid);
-        viewUid.setText("uid: "+uid);
+        viewUid.setText("uid: "+currentTicket.getUid());
         Button backButton = (Button) findViewById(R.id.detail_back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,5 +67,21 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivity(intentToChat);
             }
         });
+    }
+
+    private Ticket getCurrentTicket(String ticketID){
+        Ticket ticket = new Ticket("mock ticket");
+        ticket.setBonus("$810");
+        ticket.setSenderID("sender114514");
+        ticket.setReceiverID("receiver114514");
+        ticket.setDeadline(new Date());
+        return ticket;
+    }
+
+    private User getUser(String userID){
+        User user = new User(userID);
+        user.setDorm("zz220");
+        user.setMail("ss@zz");
+        return user;
     }
 }
