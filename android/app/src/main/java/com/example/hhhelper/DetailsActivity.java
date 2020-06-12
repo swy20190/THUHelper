@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -135,6 +136,71 @@ public class DetailsActivity extends AppCompatActivity {
         long seconds = (ddl.getTime()-now.getTime())/1000;
         time2DDL.setText("距离DDL还有"+seconds+"秒");
 
+        final Button accept = (Button) findViewById(R.id.detail_exe_button);
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(myID.equals(currentTicket.getSenderID())){
+                    Toast.makeText(DetailsActivity.this,"你不能抢自己的订单",Toast.LENGTH_SHORT).show();
+                }else if(!currentTicket.getStatus().equals(Ticket.Status.RELEASED)){
+                    Toast.makeText(DetailsActivity.this,"订单不可抢",Toast.LENGTH_SHORT).show();
+                }else {
+                    if (acceptTicket()) {
+                        Toast.makeText(DetailsActivity.this, "已抢单", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(DetailsActivity.this, "抢单失败", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        Button cancel = (Button) findViewById(R.id.detail_cancel_button);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!myID.equals(currentTicket.getSenderID())){
+                    Toast.makeText(DetailsActivity.this,"你没有权限删除该订单",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    if(cancelTicket()){
+                        Toast.makeText(DetailsActivity.this,"订单已删除",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(DetailsActivity.this,"删除失败",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        Button ensure = (Button)findViewById(R.id.detail_ensure_button);
+        ensure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!myID.equals(currentTicket.getSenderID())){
+                    Toast.makeText(DetailsActivity.this,"您非发布者，没有此权限",Toast.LENGTH_SHORT).show();
+                }else{
+                    if(ensureTicket()){
+                        Toast.makeText(DetailsActivity.this,"订单已完成",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(DetailsActivity.this,"操作失败",Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        final Button toChatting = (Button)findViewById(R.id.detail_ticket_tochatting);
+        toChatting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentTicket.getStatus().equals(Ticket.Status.ACCEPTED)||
+                currentTicket.getStatus().equals(Ticket.Status.TIMEOUT)||
+                currentTicket.getStatus().equals(Ticket.Status.FINISHED)){
+                    toChatting();
+                }else{
+                    Toast.makeText(DetailsActivity.this,"聊天窗口未开放",Toast.LENGTH_SHORT).show();
+                    toChatting(); //测试用
+                }
+            }
+        });
 
 
     }
@@ -153,5 +219,23 @@ public class DetailsActivity extends AppCompatActivity {
         user.setDorm("zz220");
         user.setMail("ss@zz");
         return user;
+    }
+
+    private boolean acceptTicket(){
+        return true;
+    }
+
+    private boolean cancelTicket(){
+        return true;
+    }
+
+    private boolean ensureTicket(){
+        return true;
+    }
+
+    private void toChatting(){
+        Intent intent = new Intent(DetailsActivity.this, ChattingActivity.class);
+        intent.putExtra("ticketUID",currentTicket.getUid());
+        startActivity(intent);
     }
 }

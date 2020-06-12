@@ -13,7 +13,7 @@ public class ChattingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatting);
         Intent intent = getIntent();
-        String partnerName = intent.getStringExtra("partnerID");// 这里应该是通过id查找到昵称
+        String partnerName = intent.getStringExtra("ticketUID");// 这里应该是通过id查找到昵称
         TextView chatter = (TextView) findViewById(R.id.chatting_partner_name);
         chatter.setText(partnerName);
     }
