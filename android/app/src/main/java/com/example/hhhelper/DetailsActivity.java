@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -35,38 +39,104 @@ public class DetailsActivity extends AppCompatActivity {
         // 应该需要开一个线程，然后更新ui
         // 或者布局静态，点击按钮的时候报error（比如你不能抢自己的订单，你不能删别人的订单）
         currentTicket = getCurrentTicket(uid);
-        final TextView viewUid = (TextView) findViewById(R.id.detail_ticket_uid);
-        viewUid.setText("uid: "+currentTicket.getUid());
-        Button backButton = (Button) findViewById(R.id.detail_back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(DetailsActivity.this,MainActivity.class);
-                startActivity(intent1);
+        String senderIDString = currentTicket.getSenderID();
+        String receiverIDString = currentTicket.getReceiverID();
+        if(senderIDString!=null){
+            sender = getUser(senderIDString);
+            //头像
+            CircleImageView senderAvatar = (CircleImageView)findViewById(R.id.detail_sender_avatar);
+            Bitmap bitmap = null;
+            try{
+                byte[] bitmapByte  = Base64.decode(sender.getAvatarBase64String(), Base64.DEFAULT);
+                bitmap = BitmapFactory.decodeByteArray(bitmapByte,0,bitmapByte.length);
+                senderAvatar.setImageBitmap(bitmap);
+            }catch (Exception e){
+                e.printStackTrace();
             }
-        });
-        final TextView senderID = (TextView) findViewById(R.id.detail_sender_uid); //这个id决定你与谁聊天
-        CircleImageView senderAvatar = (CircleImageView)findViewById(R.id.detail_sender_avatar);
-        senderAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentToChat = new Intent(DetailsActivity.this,ChattingActivity.class);
-                //其实这里应该是用订单的id从服务器网络请求得到用户的senderID，然后将显示控件置为该ID，这里为了方便从控件get得到ID
-                intentToChat.putExtra("partnerID",senderID.getText().toString());
-                startActivity(intentToChat);
+            //uid
+            TextView senderUID = (TextView)findViewById(R.id.detail_sender_uid);
+            senderUID.setText(sender.getUserID());
+            //nickname
+            TextView senderNickname = (TextView) findViewById(R.id.detail_sender_nickname);
+            senderNickname.setText(sender.getNickName());
+            //dorm
+            TextView senderDorm = (TextView) findViewById(R.id.detail_sender_dorm);
+            senderDorm.setText(sender.getDorm());
+            //mail
+            TextView senderMail = (TextView) findViewById(R.id.detail_sender_mail);
+            senderMail.setText(sender.getMail());
+        }else{
+            View senderInfo = (View) findViewById(R.id.detail_sender_info);
+            senderInfo.setLayoutParams(new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,0));
+        }
+
+        if(receiverIDString!=null){
+            receiver = getUser(senderIDString);
+            //头像
+            CircleImageView receiverAvatar = (CircleImageView)findViewById(R.id.detail_receiver_avatar);
+            Bitmap bitmap = null;
+            try{
+                byte[] bitmapByte  = Base64.decode(receiver.getAvatarBase64String(), Base64.DEFAULT);
+                bitmap = BitmapFactory.decodeByteArray(bitmapByte,0,bitmapByte.length);
+                receiverAvatar.setImageBitmap(bitmap);
+            }catch (Exception e){
+                e.printStackTrace();
             }
-        });
-        //这里是动态决定可以和谁聊天的，毕竟你或是sender,或是receiver,不可能与这两个人同时聊天。
-        final TextView receiverID = (TextView) findViewById(R.id.detail_receiver_uid);
-        CircleImageView receiverAvatar = (CircleImageView) findViewById(R.id.detail_receiver_avatar);
-        receiverAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentToChat = new Intent(DetailsActivity.this,ChattingActivity.class);
-                intentToChat.putExtra("partnerID",receiverID.getText().toString());
-                startActivity(intentToChat);
-            }
-        });
+            //uid
+            TextView receiverUID = (TextView)findViewById(R.id.detail_receiver_uid);
+            receiverUID.setText(receiver.getUserID());
+            //nickname
+            TextView receiverNickname = (TextView) findViewById(R.id.detail_receiver_nickname);
+            receiverNickname.setText(receiver.getNickName());
+            //dorm
+            TextView receiverDorm = (TextView) findViewById(R.id.detail_receiver_dorm);
+            receiverDorm.setText(receiver.getDorm());
+            //mail
+            TextView receiverMail = (TextView) findViewById(R.id.detail_receiver_mail);
+            receiverMail.setText(receiver.getMail());
+        }else{
+            View receiverInfo = (View) findViewById(R.id.detail_receiver_info);
+            receiverInfo.setLayoutParams(new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,0));
+        }
+
+        TextView ticketTitle = (TextView)findViewById(R.id.detail_ticket_title);
+        ticketTitle.setText(currentTicket.getName());
+
+        TextView ticketUID = (TextView)findViewById(R.id.detail_ticket_uid);
+        ticketUID.setText(currentTicket.getUid());
+
+        TextView ticketContent = (TextView)findViewById(R.id.detail_ticket_content);
+        ticketContent.setText(currentTicket.getDescriptions());
+
+        TextView ticketStatus = (TextView) findViewById(R.id.detail_ticket_status);
+        switch (currentTicket.getStatus()){
+            case RELEASED:
+                ticketStatus.setText("无人接单");
+                break;
+            case ACCEPTED:
+                ticketStatus.setText("有人接单，未完成");
+                break;
+            case FINISHED:
+                ticketStatus.setText("已完成");
+                break;
+            case TIMEOUT:
+                ticketStatus.setText("已超时");
+                break;
+            case TERMINATED:
+                ticketStatus.setText("已关闭");
+                break;
+            default:
+                break;
+        }
+
+        TextView time2DDL = (TextView) findViewById(R.id.detail_ticket_t2ddl);
+        Date now = new Date();
+        Date ddl = currentTicket.getDeadline();
+        long seconds = (ddl.getTime()-now.getTime())/1000;
+        time2DDL.setText("距离DDL还有"+seconds+"秒");
+
+
+
     }
 
     private Ticket getCurrentTicket(String ticketID){

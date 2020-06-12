@@ -11,7 +11,14 @@ public class Ticket {
     private String senderImageBase64; //发布者头像
     private String senderID;
     private String receiverID;
-    private int ticketStatus;
+    public enum Status{
+        RELEASED, //not accepted yet
+        ACCEPTED,
+        TIMEOUT, //deadline missed, but not terminated
+        FINISHED, //finished
+        TERMINATED
+    }
+    private Status status;
     private String descriptions; //详细内容
 
 
@@ -21,6 +28,7 @@ public class Ticket {
         this.bonus = "$1919";
         this.deadline = new Date();
         this.descriptions = "114,514!114,514!";
+        this.status = Status.RELEASED;
     }
     public String getName(){
         return name;
@@ -46,6 +54,10 @@ public class Ticket {
     public String getDescriptions(){
         return this.descriptions;
     }
+    public Status getStatus(){
+        return this.status;
+    }
+
     public void setSenderImageBase64(String senderImageBase64){
         this.senderImageBase64 = senderImageBase64;
     }
@@ -60,6 +72,9 @@ public class Ticket {
     }
     public void setReceiverID(String id){
         this.receiverID = id;
+    }
+    public void setStatus(Status status){
+        this.status = status;
     }
 
 }

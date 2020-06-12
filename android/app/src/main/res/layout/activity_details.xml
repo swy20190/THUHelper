@@ -38,6 +38,12 @@
                 android:text="senderDorm"
                 android:id="@+id/detail_sender_dorm"
                 android:textColor="@color/white"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="senderMail"
+                android:id="@+id/detail_sender_mail"
+                android:textColor="@color/white"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -77,6 +83,12 @@
                 android:text="receiverDorm"
                 android:textColor="@color/white"
                 android:id="@+id/detail_receiver_dorm"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="receiverMail"
+                android:id="@+id/detail_receiver_mail"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </LinearLayout>
     <TextView
@@ -150,10 +162,18 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="返回首页"
+        android:text="确认订单已完成"
         android:textColor="@color/accentTsinghua"
         android:background="@color/darkTsinghua"
-        android:id="@+id/detail_back_button"
+        android:id="@+id/detail_ensure_button"
+        android:layout_weight="5"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="私聊对方"
+        android:textColor="@color/white"
+        android:background="@color/basicTsinghua"
+        android:id="@+id/detail_ticket_tochatting"
         android:layout_weight="5"/>
 
 
