@@ -64,7 +64,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Ticket ticket = mTicketList.get(position);
         //holder.ticketImage.setImageResource(ticket.getImageId());
         holder.ticketName.setText(ticket.getTitle());
-        holder.ticketBonus.setText(ticket.getBonus());
+        holder.ticketBonus.setText(ticket.getBonus()+"");
         holder.ticketDDL.setText(ticket.getDeadline().toString());
         Bitmap bitmap = null;
         try{
