@@ -19,7 +19,7 @@ public class Ticket {
     private String acceptUserID;
     private Calendar createTime;
     private TicketState state = TicketState.RELEASED;
-    private int bonus = 0;
+    private String bonus = "";
     private Calendar deadline = null;
     private String location = "";
     private String description = "";
@@ -42,7 +42,7 @@ public class Ticket {
         String acceptUserID,
         Calendar createTime,
         TicketState state,
-        int bonus,
+        String bonus,
         Calendar deadline,
         String location,
         String description,
@@ -100,7 +100,7 @@ public class Ticket {
         String acceptUserID = "mockUserID" +(int)(Math.random()*10000);
         Calendar createTime = Calendar.getInstance();
         TicketState state = TicketState.RELEASED;
-        int bonus = 5;
+        String bonus = "";
         Calendar deadline = Calendar.getInstance();
         deadline.add(Calendar.DATE, 7);
         String location = "somewhere";
@@ -143,7 +143,7 @@ public class Ticket {
     public String getImageId(){
         return User.getBackendUser(releaseUserID).getImageId();
     }
-    public int getBonus(){
+    public String getBonus(){
         return bonus;
     }
     public Calendar getDeadline(){
@@ -161,7 +161,7 @@ public class Ticket {
     public TicketState getStatus(){
         return this.state;
     }
-    public void setBonus(int bonus){
+    public void setBonus(String bonus){
         this.bonus = bonus;
     }
     public void setDeadline(Calendar deadline){
