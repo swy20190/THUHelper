@@ -16,11 +16,26 @@
         android:layout_height="0dp"
         android:layout_weight="6"
         android:id="@+id/chatting_recycler_view"/>
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:orientation="horizontal">
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
         android:hint="enter your message here"
         android:id="@+id/chatting_enter"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="发送"
+        android:textColor="@color/accentTsinghua"
+        android:background="@color/basicTsinghua"
+        android:id="@+id/chatting_send"/>
+    </LinearLayout>
 
 </LinearLayout>

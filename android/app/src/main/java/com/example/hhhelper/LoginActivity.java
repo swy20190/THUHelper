@@ -51,22 +51,35 @@ public class LoginActivity extends AppCompatActivity {
                 String accountString = account.getText().toString();
                 String passwordString = password.getText().toString();
                 //通过网络检查账号密码是否匹配，没有网你玩个锤子
-                if(passwordString.equals("114514")||passwordString.equals("1919810")){ //这里模拟切换账号
-                    editor.putBoolean("isEnsured",true); //经过登录验证
-                    editor.putString("account",accountString);
-                    editor.putString("password",passwordString);
+                String uid = getUserId(accountString, passwordString);
+                if(uid.equals("invalid")){
+                    Toast.makeText(LoginActivity.this,"账户与密码不符",Toast.LENGTH_SHORT).show();
+                }
+                else{
                     if(rememberInfo.isChecked()){
                         editor.putBoolean("isRemembered",true);
                     }
+                    editor.putString("userID",uid);
                     editor.commit();
-
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
-                }
-                else{
-                    Toast.makeText(LoginActivity.this,"账户与密码不符",Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private String getUserId(String account, String password){
+        //TODO
+        //通过后台检查账户与密码
+        String ret = "";
+        if(account.equals("beast")&&password.equals("114514")){
+            ret = "uid114514";
+            editor.putBoolean("isEnsured",true);
+            editor.commit();
+        }
+        else{
+            ret = "invalid";
+        }
+        return ret;
     }
 }

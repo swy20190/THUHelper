@@ -7,6 +7,7 @@ public class User {
     private String name;
     private String imageID;
     private String account;
+    private String mail;
     private String dormitory;
     private String major;
     private int releaseCount;
@@ -20,6 +21,7 @@ public class User {
         String name,
         String imageID,
         String account,
+        String mail,
         String dormitory,
         String major,
         float score,
@@ -30,6 +32,7 @@ public class User {
         this.name = name;
         this.imageID = imageID;
         this.account = account;
+        this.mail = mail
         this.dormitory = dormitory;
         this.major = major;
         this.score = score;
@@ -75,7 +78,8 @@ public class User {
         String name = "mock name";
         String imageID = "mockImageID";
         String account = "account";
-        String dormitory = "dormitory:;
+        String mail = "mail";
+        String dormitory = "dormitory";
         String major = "major";
         float score = 4.9;
         ArrayList<String> releaseTickets = new ArrayList<>();
@@ -86,6 +90,7 @@ public class User {
                 name,
                 imageID,
                 account,
+                mail,
                 dormitory,
                 major,
                 score,
@@ -94,5 +99,35 @@ public class User {
         );
 
         return u;
+    }
+
+
+    public String getUserID(){
+        return uid;
+    }
+    public String getNickName(){
+        return name;
+    }
+    public String getMail(){
+        return mail;
+    }
+    public String getDorm(){
+        return dormitory;
+    }
+    public String getAvatarBase64String() {
+        return imageID;
+    }
+
+    public void setNickName(String nickName){
+        this.name = nickName;
+    }
+    public void setMail(String mail){
+        this.mail = mail;
+    }
+    public void setAvatarBase64String(String base64String){
+        this.imageID = base64String;
+    }
+    public void setDorm(String dorm){
+        this.dormitory = dorm;
     }
 }

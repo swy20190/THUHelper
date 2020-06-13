@@ -33,7 +33,7 @@ public class SearchResult extends AppCompatActivity {
     }
     private void initTickets(){
         for(int i=0;i<20;i++){
-            searchResults.add(new Ticket(queryString+i,R.mipmap.ic_launcher));
+            searchResults.add(new Ticket(queryString+i));
         }
     }
 }

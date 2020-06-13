@@ -63,16 +63,6 @@ public class Ticket {
         this.score = score;
     }
 
-    public String getName(){
-        return name;
-    }
-    public String getImageId(){
-        return User.getBackendUser(releaseUserID).getImageId();
-    }
-    public String getUid(){
-        return uid;
-    }
-
     // initTicket: init a ticket at backend, then return the ticket created
     static Ticket initTicket(
             String title, // title
@@ -138,10 +128,50 @@ public class Ticket {
     static ArrayList<String> getBackendTicketIdList(int n) {
         // TODO:GET method
         ArrayList<String> l = new ArrayList<>();
-        for (int i = 0;i < n; i++) {
+        for (int i = 0; i < n; i++) {
             l.add("mockTicketID" + String.valueOf(i));
         }
         return l;
+    }
+
+    public String getUid(){
+        return uid;
+    }
+    public String getTitle(){
+        return title;
+    }
+    public String getImageId(){
+        return User.getBackendUser(releaseUserID).getImageId();
+    }
+    public int getBonus(){
+        return bonus;
+    }
+    public Calendar getDeadline(){
+        return deadline;
+    }
+    public String getReleaseUserID(){
+        return this.releaseUserID;
+    }
+    public String getAcceptUserID(){
+        return this.acceptUserID;
+    }
+    public String getDescription(){
+        return this.description;
+    }
+    public TicketState getStatus(){
+        return this.state;
+    }
+    public void setBonus(int bonus){
+        this.bonus = bonus;
+    }
+    public void setDeadline(Calendar deadline){
+        this.deadline = deadline;
+    }
+    public void setAcceptUserID(String id){
+        this.acceptUserID = id;
+    }
+    public void setStatus(TicketState status){
+        this.state = status;
     }
 
 }

@@ -23,28 +23,29 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="score1"
+                android:text="senderUID"
                 android:textColor="@color/white"
-                android:id="@+id/detail_sender_score"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="mCounts1"
-                android:textColor="@color/white"
-                android:id="@+id/detail_sender_mCount"/>
+                android:id="@+id/detail_sender_uid"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="nickname1"
                 android:textColor="@color/white"
                 android:id="@+id/detail_sender_nickname"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="senderDorm"
+                android:id="@+id/detail_sender_dorm"
+                android:textColor="@color/white"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="senderMail"
+                android:id="@+id/detail_sender_mail"
+                android:textColor="@color/white"/>
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="senderUID"
-            android:textColor="@color/white"
-            android:id="@+id/detail_sender_uid"/>
+
     </LinearLayout>
     <LinearLayout
         android:id="@+id/detail_receiver_info"
@@ -66,28 +67,29 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="score2"
+                android:text="receiverUID"
                 android:textColor="@color/white"
-                android:id="@+id/detail_receiver_score"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="mCounts2"
-                android:textColor="@color/white"
-                android:id="@+id/detail_receiver_mCount"/>
+                android:id="@+id/detail_receiver_uid"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="nickname2"
                 android:textColor="@color/white"
                 android:id="@+id/detail_receiver_nickname"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="receiverDorm"
+                android:textColor="@color/white"
+                android:id="@+id/detail_receiver_dorm"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="receiverMail"
+                android:id="@+id/detail_receiver_mail"
+                android:textColor="@color/white"/>
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="receiverUID"
-            android:textColor="@color/white"
-            android:id="@+id/detail_receiver_uid"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
@@ -160,10 +162,18 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="返回首页"
+        android:text="确认订单已完成"
         android:textColor="@color/accentTsinghua"
         android:background="@color/darkTsinghua"
-        android:id="@+id/detail_back_button"
+        android:id="@+id/detail_ensure_button"
+        android:layout_weight="5"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="私聊对方"
+        android:textColor="@color/white"
+        android:background="@color/basicTsinghua"
+        android:id="@+id/detail_ticket_tochatting"
         android:layout_weight="5"/>
 
 
