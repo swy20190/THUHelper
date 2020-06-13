@@ -32,7 +32,7 @@ public class User {
         this.name = name;
         this.imageID = imageID;
         this.account = account;
-        this.mail = mail
+        this.mail = mail;
         this.dormitory = dormitory;
         this.major = major;
         this.score = score;
@@ -81,7 +81,7 @@ public class User {
         String mail = "mail";
         String dormitory = "dormitory";
         String major = "major";
-        float score = 4.9;
+        float score = (float) 4.9;
         ArrayList<String> releaseTickets = new ArrayList<>();
         ArrayList<String> acceptTickets = new ArrayList<>();
 
