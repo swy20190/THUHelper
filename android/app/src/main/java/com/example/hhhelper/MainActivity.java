@@ -481,7 +481,7 @@ public class MainActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bos);
         byte[] bytes = bos.toByteArray();
         String base64Bitmap = Base64.encodeToString(bytes, Base64.DEFAULT);
-        //TODO
+        //TODO update avatar, it should be a User clas method
         //将base64Bitmap上传到服务器
         return true;
     }

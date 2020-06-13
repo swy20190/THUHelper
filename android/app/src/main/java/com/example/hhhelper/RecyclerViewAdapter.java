@@ -63,12 +63,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder holder, int position){
         Ticket ticket = mTicketList.get(position);
         //holder.ticketImage.setImageResource(ticket.getImageId());
-        holder.ticketName.setText(ticket.getName());
+        holder.ticketName.setText(ticket.getTitle());
         holder.ticketBonus.setText(ticket.getBonus());
         holder.ticketDDL.setText(ticket.getDeadline().toString());
         Bitmap bitmap = null;
         try{
-            byte[] bitmapByte  = Base64.decode(ticket.getSenderImageBase64(), Base64.DEFAULT);
+            byte[] bitmapByte  = Base64.decode(ticket.getImageId(), Base64.DEFAULT);
             bitmap = BitmapFactory.decodeByteArray(bitmapByte,0,bitmapByte.length);
             holder.ticketImage.setImageBitmap(bitmap);
         }catch (Exception e){

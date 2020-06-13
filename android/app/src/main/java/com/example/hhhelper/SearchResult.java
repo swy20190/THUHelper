@@ -32,8 +32,12 @@ public class SearchResult extends AppCompatActivity {
         mRecyclerView.setAdapter(adapter);
     }
     private void initTickets(){
-        for(int i=0;i<20;i++){
-            searchResults.add(new Ticket(queryString+i));
+        //TODO: modify this API
+        ArrayList<String> ticketIDs = Ticket.getBackendTicketIdList(20);
+        for(String tid: ticketIDs){
+            //String senderImage = preferences.getString("avatarBase64","");
+            Ticket ticket = Ticket.getBackendTicket(tid);
+            searchResults.add(ticket);
         }
     }
 }

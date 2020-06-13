@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -39,11 +40,11 @@ public class DetailsActivity extends AppCompatActivity {
         // 使用这个UID进行订单的信息查询
         // 应该需要开一个线程，然后更新ui
         // 或者布局静态，点击按钮的时候报error（比如你不能抢自己的订单，你不能删别人的订单）
-        currentTicket = getCurrentTicket(uid);
-        String senderIDString = currentTicket.getSenderID();
-        String receiverIDString = currentTicket.getReceiverID();
-        if(senderIDString!=null){
-            sender = getUser(senderIDString);
+        currentTicket = Ticket.getBackendTicket(uid);
+        String senderID = currentTicket.getReleaseUserID();
+        String receiverID = currentTicket.getAcceptUserID();
+        if(senderID!=null){
+            sender = User.getBackendUser(senderID);
             //头像
             CircleImageView senderAvatar = (CircleImageView)findViewById(R.id.detail_sender_avatar);
             Bitmap bitmap = null;
@@ -71,8 +72,8 @@ public class DetailsActivity extends AppCompatActivity {
             senderInfo.setLayoutParams(new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.MATCH_PARENT,0));
         }
 
-        if(receiverIDString!=null){
-            receiver = getUser(senderIDString);
+        if(receiverID!=null){
+            receiver = User.getBackendUser(receiverID);
             //头像
             CircleImageView receiverAvatar = (CircleImageView)findViewById(R.id.detail_receiver_avatar);
             Bitmap bitmap = null;
@@ -101,13 +102,13 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         TextView ticketTitle = (TextView)findViewById(R.id.detail_ticket_title);
-        ticketTitle.setText(currentTicket.getName());
+        ticketTitle.setText(currentTicket.getTitle());
 
         TextView ticketUID = (TextView)findViewById(R.id.detail_ticket_uid);
         ticketUID.setText(currentTicket.getUid());
 
         TextView ticketContent = (TextView)findViewById(R.id.detail_ticket_content);
-        ticketContent.setText(currentTicket.getDescriptions());
+        ticketContent.setText(currentTicket.getDescription());
 
         TextView ticketStatus = (TextView) findViewById(R.id.detail_ticket_status);
         switch (currentTicket.getStatus()){
@@ -131,18 +132,19 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         TextView time2DDL = (TextView) findViewById(R.id.detail_ticket_t2ddl);
-        Date now = new Date();
-        Date ddl = currentTicket.getDeadline();
-        long seconds = (ddl.getTime()-now.getTime())/1000;
+        Calendar now = Calendar.getInstance();
+        Calendar ddl = currentTicket.getDeadline();
+        long seconds = now.getTimeInMillis() - ddl.getTimeInMillis();
+
         time2DDL.setText("距离DDL还有"+seconds+"秒");
 
         final Button accept = (Button) findViewById(R.id.detail_exe_button);
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(myID.equals(currentTicket.getSenderID())){
+                if(myID.equals(currentTicket.getReleaseUserID())){
                     Toast.makeText(DetailsActivity.this,"你不能抢自己的订单",Toast.LENGTH_SHORT).show();
-                }else if(!currentTicket.getStatus().equals(Ticket.Status.RELEASED)){
+                }else if(!currentTicket.getStatus().equals(Ticket.TicketState.RELEASED)){
                     Toast.makeText(DetailsActivity.this,"订单不可抢",Toast.LENGTH_SHORT).show();
                 }else {
                     if (acceptTicket()) {
@@ -158,7 +160,7 @@ public class DetailsActivity extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!myID.equals(currentTicket.getSenderID())){
+                if(!myID.equals(currentTicket.getReleaseUserID())){
                     Toast.makeText(DetailsActivity.this,"你没有权限删除该订单",Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -175,7 +177,7 @@ public class DetailsActivity extends AppCompatActivity {
         ensure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!myID.equals(currentTicket.getSenderID())){
+                if(!myID.equals(currentTicket.getReleaseUserID())){
                     Toast.makeText(DetailsActivity.this,"您非发布者，没有此权限",Toast.LENGTH_SHORT).show();
                 }else{
                     if(ensureTicket()){
@@ -191,9 +193,9 @@ public class DetailsActivity extends AppCompatActivity {
         toChatting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(currentTicket.getStatus().equals(Ticket.Status.ACCEPTED)||
-                currentTicket.getStatus().equals(Ticket.Status.TIMEOUT)||
-                currentTicket.getStatus().equals(Ticket.Status.FINISHED)){
+                if(currentTicket.getStatus().equals(Ticket.TicketState.ACCEPTED)||
+                currentTicket.getStatus().equals(Ticket.TicketState.TIMEOUT)||
+                currentTicket.getStatus().equals(Ticket.TicketState.FINISHED)){
                     toChatting();
                 }else{
                     Toast.makeText(DetailsActivity.this,"聊天窗口未开放",Toast.LENGTH_SHORT).show();
@@ -203,22 +205,6 @@ public class DetailsActivity extends AppCompatActivity {
         });
 
 
-    }
-
-    private Ticket getCurrentTicket(String ticketID){
-        Ticket ticket = new Ticket("mock ticket");
-        ticket.setBonus("$810");
-        ticket.setSenderID("sender114514");
-        ticket.setReceiverID("receiver114514");
-        ticket.setDeadline(new Date());
-        return ticket;
-    }
-
-    private User getUser(String userID){
-        User user = new User(userID);
-        user.setDorm("zz220");
-        user.setMail("ss@zz");
-        return user;
     }
 
     private boolean acceptTicket(){

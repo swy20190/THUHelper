@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Fragment_market extends Fragment {
@@ -75,10 +76,11 @@ public class Fragment_market extends Fragment {
         data = new ArrayList<>();
         String base64Mock = preferences.getString("avatarBase64","");
 
-        for(int i=0;i<20;i++){
+        // TODO: modify this API
+        ArrayList<String> ticketIDs = Ticket.getBackendTicketIdList(20);
+        for(String tid: ticketIDs){
             //String senderImage = preferences.getString("avatarBase64","");
-            Ticket ticket = new Ticket("订单市场"+(int)(Math.random()*20));
-            ticket.setSenderImageBase64(base64Mock);
+            Ticket ticket = Ticket.getBackendTicket(tid);
             data.add(ticket);
         }
     }

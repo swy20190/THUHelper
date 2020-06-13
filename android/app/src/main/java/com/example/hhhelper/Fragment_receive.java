@@ -74,10 +74,11 @@ public class Fragment_receive extends Fragment {
         data = new ArrayList<>();
         String base64Mock = preferences.getString("avatarBase64","");
 
-        for(int i=0;i<20;i++){
+        // todo modify this api
+        ArrayList<String> ticketIDs = Ticket.getBackendTicketIdList(20);
+        for(String tid: ticketIDs){
             //String senderImage = preferences.getString("avatarBase64","");
-            Ticket ticket = new Ticket("我的接单"+(int)(Math.random()*20));
-            ticket.setSenderImageBase64(base64Mock);
+            Ticket ticket = Ticket.getBackendTicket(tid);
             data.add(ticket);
         }
     }
