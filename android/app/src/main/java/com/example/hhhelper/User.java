@@ -1,5 +1,9 @@
 package com.example.hhhelper;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class User {
@@ -64,14 +68,50 @@ public class User {
         String name
     ) {
         // TODO: send post request to create new ticket
-
+//        BackendRequest r = new BackendRequest("/user");
+        BackendRequest r = new BackendRequest("/test"); // only for test
+//        JSONObject j = new JSONObject();
+//        JSONObject ret;
+//        try {
+//            j.putOpt("name", name);
+//            j.putOpt("account", account);
+//            ret = r.post((j));
+//            return ret.optString("id", null);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
         return "mockUserID";
     }
 
     static User getBackendUser(String id) {
         // TODO: get request
+//        BackendRequest r = new BackendRequest("/user" + id);
+        BackendRequest r = new BackendRequest("/test"); // only for test
+        JSONObject j = r.get();
 
         // unpack JSON
+        if (j == null) {
+            return null;
+        }
+
+//        String name = j.optString("name", null);
+//        String imageID = "imageID";
+//        String account = j.optString("account", null);
+//        String mail = j.optString("mail", null);
+//        String dormitory = j.optString("dormitory", null);
+//        String major = j.optString("major", null);
+//        float score = (float)j.optDouble("score", null);
+//        JSONArray releaseTicketsArray = j.optJSONArray("releaseTickets");
+//        ArrayList<String> releaseTickets = new ArrayList<>(releaseTicketsArray.length());
+//        for (int i = 0;i < releaseTicketsArray.length(); i++) {
+//            releaseTickets.add(releaseTicketsArray.optString(i, null));
+//        }
+//        JSONArray acceptTicketsArray = j.optJSONArray("acceptTickets");
+//        ArrayList<String> acceptTickets = new ArrayList<>(releaseTicketsArray.length());
+//        for (int i = 0;i < acceptTicketsArray.length(); i++) {
+//            acceptTickets.add(acceptTicketsArray.optString(i, null));
+//        }
 
         // create user at frontend
 

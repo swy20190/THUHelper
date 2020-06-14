@@ -77,7 +77,7 @@ public class Fragment_market extends Fragment {
         String base64Mock = preferences.getString("avatarBase64","");
 
         // TODO: modify this API
-        ArrayList<String> ticketIDs = Ticket.getBackendTicketIdList(20);
+        ArrayList<String> ticketIDs = Ticket.getBackendTicketLatestList(20);
         for(String tid: ticketIDs){
             //String senderImage = preferences.getString("avatarBase64","");
             Ticket ticket = Ticket.getBackendTicket(tid);

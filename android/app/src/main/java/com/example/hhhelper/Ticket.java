@@ -1,5 +1,9 @@
 package com.example.hhhelper;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Ticket {
@@ -84,6 +88,20 @@ public class Ticket {
             String description // description of the mission
     ) {
         // TODO:POST method
+//        BackendRequest r = new BackendRequest("/ticket");
+        BackendRequest r = new BackendRequest("/test"); // only for test
+//        JSONObject j = new JSONObject();
+//        JSONObject ret;
+//        try {
+//            j.putOpt("title", title);
+//            j.putOpt("releaseUserID", releaseUserID);
+//            j.putOpt("description", description);
+//            ret = r.post((j));
+//            return ret.optString("id", null);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
 
 
         // return mock id
@@ -92,8 +110,43 @@ public class Ticket {
 
     static Ticket getBackendTicket(String id) {
         // send a get request to get ticket information
-
-        // TODO:GET method
+//        BackendRequest r = new BackendRequest("/ticket" + id);
+        BackendRequest r = new BackendRequest("/test"); // only for test
+//        JSONObject j = r.get();
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//        Date tmpDate;
+//
+//        String name = j.optString("name", null);
+//        String releaseUserID = j.optString("releaseUserID", null);
+//        String acceptUserID = j.optString("acceptUserID", null);
+//        String createTimeString = j.optString("createTime", null);
+//        Calendar createTime;
+//        try {
+//            tmpDate = sdf.parse(createTimeString);
+//            createTime = Calendar.getInstance();
+//            createTime.setTime(tmpDate);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            createTime = null;
+//        }
+//        String stateString = j.optString("state", "INVALID");
+//        TicketState state = TicketState.valueOf(stateString);
+//        String bonus = j.optString("bonus", null);
+//        String deadlineString = j.optString("deadline", null);
+//        Calendar deadline;
+//        try {
+//            tmpDate = sdf.parse(deadlineString);
+//            deadline = Calendar.getInstance();
+//            deadline.setTime(tmpDate);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            createTime = null;
+//        }
+//        String location = j.optString("location", null);
+//        String description = j.optString("description", null);
+//        String feedback = j.optString("feedback", null);
+//        int score = j.optInt("score", -1);
 
         String title = "mock name";
         String releaseUserID = "mockUserID" +(int)(Math.random()*10000);
@@ -123,6 +176,48 @@ public class Ticket {
                 score
         );
         return t;
+    }
+
+    static ArrayList<String> getBackendTicketLatestList(int n) {
+        // TODO:GET method
+//        BackendRequest r = new BackendRequest("/ticket/latest" + String.valueOf(n));
+        BackendRequest r = new BackendRequest("/test"); // only for test
+        JSONObject j = r.get();
+        JSONArray t = j.optJSONArray("tickets");
+
+        ArrayList<String> l = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            l.add(t.optString(i, null));
+        }
+        return l;
+    }
+
+    static ArrayList<String> getBackendTicketReceiveList(int n, String id) {
+        // TODO:GET method
+//        BackendRequest r = new BackendRequest("/ticket/accept/" + id + "/" + String.valueOf(n));
+        BackendRequest r = new BackendRequest("/test"); // only for test
+        JSONObject j = r.get();
+        JSONArray t = j.optJSONArray("tickets");
+
+        ArrayList<String> l = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            l.add(t.optString(i, null));
+        }
+        return l;
+    }
+
+    static ArrayList<String> getBackendTicketAcceptList(int n, String id) {
+        // TODO:GET method
+//        BackendRequest r = new BackendRequest("/ticket/accept/" + id + "/" + String.valueOf(n));
+        BackendRequest r = new BackendRequest("/test"); // only for test
+        JSONObject j = r.get();
+        JSONArray t = j.optJSONArray("tickets");
+
+        ArrayList<String> l = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            l.add(t.optString(i, null));
+        }
+        return l;
     }
 
     static ArrayList<String> getBackendTicketIdList(int n) {

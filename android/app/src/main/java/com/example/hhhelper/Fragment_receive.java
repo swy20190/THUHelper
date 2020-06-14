@@ -73,9 +73,12 @@ public class Fragment_receive extends Fragment {
     private void initData(){
         data = new ArrayList<>();
         String base64Mock = preferences.getString("avatarBase64","");
-
+        String uid = preferences.getString("userID","");
+        if (uid.equals("")) {
+            return;
+        }
         // todo modify this api
-        ArrayList<String> ticketIDs = Ticket.getBackendTicketIdList(20);
+        ArrayList<String> ticketIDs = Ticket.getBackendTicketReceiveList(20, uid);
         for(String tid: ticketIDs){
             //String senderImage = preferences.getString("avatarBase64","");
             Ticket ticket = Ticket.getBackendTicket(tid);

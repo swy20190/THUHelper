@@ -7,12 +7,12 @@ import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.OkHttpClient；
+import okhttp3.OkHttpClient;
 
 import java.io.IOException;
 
 public class BackendRequest {
-    static final String base_url = "";  // TODO: set
+    static final String base_url = "localhost:5000";  // TODO: set
     String uri = "/";
     OkHttpClient client;
 
@@ -22,17 +22,20 @@ public class BackendRequest {
         this.client = new OkHttpClient();
     }
 
-    JSONObject get() throws IOException, JSONException {
+    JSONObject get() {
         Request request = new Request.Builder()
                 .url(base_url + uri)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             return new JSONObject(response.body().string());
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 
-    JSONObject post(JSONObject json) throws IOException, JSONException {
+    JSONObject post(JSONObject json) {
         RequestBody body = RequestBody.create(json.toString(), JSON);
         Request request = new Request.Builder()
                 .url(base_url + uri)
@@ -40,10 +43,13 @@ public class BackendRequest {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             return new JSONObject(response.body().string());
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 
-    JSONObject put(JSONObject json) throws IOException, JSONException {
+    JSONObject put(JSONObject json) {
         RequestBody body = RequestBody.create(json.toString(), JSON);
         Request request = new Request.Builder()
                 .url(base_url + uri)
@@ -51,10 +57,13 @@ public class BackendRequest {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             return new JSONObject(response.body().string());
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 
-    JSONObject delete(JSONObject json) throws IOException, JSONException {
+    JSONObject delete(JSONObject json) {
         RequestBody body = RequestBody.create(json.toString(), JSON);
         Request request = new Request.Builder()
                 .url(base_url + uri)
@@ -62,6 +71,9 @@ public class BackendRequest {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             return new JSONObject(response.body().string());
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 }
