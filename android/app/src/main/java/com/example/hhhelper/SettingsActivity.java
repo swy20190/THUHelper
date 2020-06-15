@@ -65,6 +65,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //上传信息
+                //TODO
                 editor.putString("nickName",editTextNick.getText().toString());
                 editor.putString("mail",editTextMail.getText().toString());
                 editor.putString("dorm",editTextDorm.getText().toString());

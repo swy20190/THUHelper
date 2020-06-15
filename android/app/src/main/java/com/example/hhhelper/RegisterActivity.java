@@ -20,7 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText password = (EditText) findViewById(R.id.register_password);
         EditText passwordEnsure = (EditText) findViewById(R.id.register_passwordEnsure);
         Button register = (Button)findViewById(R.id.register_registerButton);
-        String accountString = account.getText().toString();
+        final String accountString = account.getText().toString();
         final String passwordString = password.getText().toString();
         final String passwordEnsureString = passwordEnsure.getText().toString();
         register.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(passwordString.equals(passwordEnsureString)){
                     // 网络操作
+                    User.createBackendUser(accountString,passwordString);
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }

@@ -6,18 +6,24 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import java.nio.file.ProviderMismatchException;
 import java.util.Calendar;
 import java.util.Timer;
 
 public class Release extends AppCompatActivity {
+    private SharedPreferences preferences;
+    private String myID;
     private Calendar mCalendar;
     private int mDate;
     private int mMonth;
@@ -36,9 +42,12 @@ public class Release extends AppCompatActivity {
         mHour = mCalendar.get(Calendar.HOUR_OF_DAY);
         mMinute = mCalendar.get(Calendar.MINUTE);
         setContentView(R.layout.activity_release);
-        EditText editTitle = (EditText) findViewById(R.id.release_title);
-        EditText editDetail = (EditText)findViewById(R.id.release_detail);
-        EditText editBonus = (EditText) findViewById(R.id.release_bonus);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        myID = preferences.getString("userID","");
+        final EditText editTitle = (EditText) findViewById(R.id.release_title);
+        final EditText editDetail = (EditText)findViewById(R.id.release_detail);
+        final EditText editBonus = (EditText) findViewById(R.id.release_bonus);
         final TextView ddlDate = (TextView)findViewById(R.id.release_ddl_date);
         ddlDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,14 +78,23 @@ public class Release extends AppCompatActivity {
             }
         });
 
+
+        final String submit_ddl = ddlDate.getText().toString().replace('.','-')+"-"+
+                ddlTime.getText().toString().replace(':','-');
+
         Button releaseButton = (Button) findViewById(R.id.release_button);
         releaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //提交
                 //如果成功
-                Intent intent = new Intent(Release.this,MainActivity.class);
-                startActivity(intent);
+                if(Ticket.createBackendTicket(editTitle.getText().toString(),myID,editBonus.getText().toString(),submit_ddl,editDetail.getText().toString())!=null){
+                    Intent intent = new Intent(Release.this,MainActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(Release.this,"创建订单失败",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

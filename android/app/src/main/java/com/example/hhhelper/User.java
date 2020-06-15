@@ -52,9 +52,9 @@ public class User {
 
     static User initUser(
         String account,
-        String name
+        String password
     ) {
-        String id = createBackendUser(account, name);
+        String id = createBackendUser(account, password);
         if (id == null) {
             return null;
         }
@@ -65,9 +65,9 @@ public class User {
 
     static String createBackendUser(
         String account,
-        String name
+        String password
     ) {
-        // TODO: send post request to create new ticket
+        // TODO: send post request to create new user
 //        BackendRequest r = new BackendRequest("/user");
         BackendRequest r = new BackendRequest("/test"); // only for test
 //        JSONObject j = new JSONObject();

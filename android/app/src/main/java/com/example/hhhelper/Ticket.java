@@ -71,9 +71,11 @@ public class Ticket {
     static Ticket initTicket(
             String title, // title
             String releaseUserID, // release user
+            String bonus, // bonus
+            String ddl, // yy-mm-dd-hh-mm-ss
             String description // description of the mission
     ) {
-        String id = createBackendTicket(title, releaseUserID, description);
+        String id = createBackendTicket(title, releaseUserID, bonus, ddl, description);
         if (id == null) { // failed
             return null;
         }
@@ -85,7 +87,9 @@ public class Ticket {
     static String createBackendTicket(
             String title, // title
             String releaseUserID, // release user
-            String description // description of the mission
+            String bonus, // bonus of the mission
+            String ddl, // ddl of the mission, yy-mm-dd-hh-mm-ss
+            String description //description of the mission
     ) {
         // TODO:POST method
 //        BackendRequest r = new BackendRequest("/ticket");

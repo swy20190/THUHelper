@@ -208,14 +208,17 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private boolean acceptTicket(){
+        // TODO accept the ticket
         return true;
     }
 
     private boolean cancelTicket(){
+        // TODO cancel the ticket
         return true;
     }
 
     private boolean ensureTicket(){
+        // TODO ensure the ticket is finished
         return true;
     }
 
